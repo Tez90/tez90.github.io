@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<title>JavaScript - read JSON from URL</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+
+<body>
+    <div class="mypanel"></div>
+
+    <script>
+    $.getJSON('https://api.scryfall.com/cards/search?q=set:2X2 color:r', function(data) {
+        var text = "";
+        data.data.forEach((item, i) => {
+          text += item.name;
+        });
+        $(".mypanel").html(text);
+    });
+    </script>
+
+</body>
+</html>
