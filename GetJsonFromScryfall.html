@@ -30,7 +30,7 @@
       return html;
     }
 
-    $.getJSON('https://api.scryfall.com/cards/search?q=set:2X2 color:r', function(data) {
+    $.getJSON('https://api.scryfall.com/cards/search?q=set:DMU color:r', function(data) {
         var text = "";
         data.data.forEach((item, i) => {
           text += showCard(item);
