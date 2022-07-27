@@ -10,10 +10,30 @@
     <div class="mypanel"></div>
 
     <script>
+    function showCard(card){
+      html = "";
+      html += "<div>"
+        html += '<img src="'+card.image_uris.normal+'" alt="'+card.name+'">'
+        html += '<div>'
+          html += 'Buy?'
+          html += '<button onclick="">Yes</button>'
+          html += '<button onclick="">No</button>'
+          html += '<button onclick="">Maybe</button>'
+        html += '</div>'
+        html += '<div>'
+          html += 'Comments:'
+        html += '</div>'
+        html += '<div>'
+          html += 'Average Price in €:' + card.prices.eur
+        html += '</div>'
+      html += "</div>"
+      return html;
+    }
+
     $.getJSON('https://api.scryfall.com/cards/search?q=set:2X2 color:r', function(data) {
         var text = "";
         data.data.forEach((item, i) => {
-          text += item.name;
+          text += showCard(item);
         });
         $(".mypanel").html(text);
     });
