@@ -13,24 +13,29 @@
     BASEURL = 'https://bpv37vsdgg.execute-api.eu-central-1.amazonaws.com/prod'
 
     function submitComment(id){
-      $.ajax({
-          url: '"'+BASEURL+'/cards/comments"',
-          type: 'post',
-          data: {
+      fetch('https://bpv37vsdgg.execute-api.eu-central-1.amazonaws.com/prod/cards/comments', {
+        method:'POST',
+        headers: {"Content-Type": 'application/json'},
+        body:  JSON.stringify({
             "id":id,
             "user":"Tez",
             "comment":document.getElementById("comment-"+id).value
-          },
-          headers: {
-              "Content-Type": 'application/json',
-          },
-          dataType: 'json',
-          success: function (data) {
-              console.info(data);
-          }
-      });
+          })
+        })
+        document.getElementById("comment-"+id).value='';
 
-      document.getElementById("comment-"+id).value=''
+        setTimeout(function() { loadComments(id); }, 2000);
+
+    }
+
+    function loadComments(id){
+      $.getJSON('https://bpv37vsdgg.execute-api.eu-central-1.amazonaws.com/prod/cards/comments/'+id, function(data) {
+          var text = "";
+          data.comments.forEach((item, i) => {
+            text += item.user+":"+item.comment+"<br>";
+          });
+          document.getElementById("comments-"+id).innerHTML=text;
+      });
     }
 
     function showCard(card){
@@ -54,6 +59,7 @@
           html += 'Average Price in €:' + card.prices.eur
         html += '</div>'
       html += "</div>"
+      loadComments(card.id)
       return html;
     }
 
