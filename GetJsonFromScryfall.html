@@ -10,6 +10,17 @@
     <div class="mypanel"></div>
 
     <script>
+    BASEURL = 'https://bpv37vsdgg.execute-api.eu-central-1.amazonaws.com/prod'
+
+    function submitComment(id){
+      $.post(BASEURL+"/cards/comments",{
+        "id":id,
+        "user":"Tez",
+        "comment":document.getElementById("comment-"+id).value
+      })
+      document.getElementById("comment-"+id).value=''
+    }
+
     function showCard(card){
       html = "";
       html += "<div>"
@@ -22,6 +33,10 @@
         html += '</div>'
         html += '<div>'
           html += 'Comments:'
+          html += '<div id="comments-'+card.id+'">'
+          html += '</div>'
+          html += '<input type="text" id="comment-'+card.id+'" name="fname"><br>'
+          html += '<button onclick="submitComment(\''+card.id+'\')">Submit</button>'
         html += '</div>'
         html += '<div>'
           html += 'Average Price in €:' + card.prices.eur
