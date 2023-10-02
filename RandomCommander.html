@@ -122,6 +122,10 @@ input[type="checkbox"] {
       	<span class="currency-code">$</span>
       	<input type="number" class="text-currency" id="value"/>
       </div>
+      <div class="filter-wrap">
+      	<span class="filter-code">$</span>
+      	<input type="text" class="text-filter" id="text-value"/>
+      </div>
       <div>
         <button onclick="loadRandomCard()">Randomize!</button>
       </div>
@@ -168,6 +172,12 @@ input[type="checkbox"] {
       if(val.length>0){
         query += "eur<="+val+" usd<="+val
       }
+
+      val = document.getElementById("value").value
+      if(val.length>0){
+        query += val
+      }
+
       loadCard(query)
     }
 
