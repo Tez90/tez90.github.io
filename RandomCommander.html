@@ -21,6 +21,12 @@
 		border-radius:5px;
 	}
 
+	.text-filter{
+		padding:10px 20px;
+		border:solid 1px #ccc;
+		border-radius:5px;
+	}
+
   #cardImage{
     height:500px
   }
@@ -123,8 +129,8 @@ input[type="checkbox"] {
       	<input type="number" class="text-currency" id="value"/>
       </div>
       <div class="filter-wrap">
-      	<span class="filter-code">$</span>
-      	<input type="text" class="text-filter" id="text-value"/>
+      	<span class="filter-code">Query</span>
+      	<input type="text" class="text-filter" id="filter-value"/>
       </div>
       <div>
         <button onclick="loadRandomCard()">Randomize!</button>
@@ -173,7 +179,7 @@ input[type="checkbox"] {
         query += "eur<="+val+" usd<="+val
       }
 
-      val = document.getElementById("value").value
+      val = document.getElementById("filter-value").value
       if(val.length>0){
         query += val
       }
